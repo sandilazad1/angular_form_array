@@ -3,7 +3,6 @@
 
   <div formArrayName="order">
     <div *ngFor="let extra of orderArr ; let i = index" [formGroupName]="i" >
-      {{extra}}
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Outline form field</mat-label>
@@ -30,11 +29,20 @@
         </mat-form-field>
       </p>
 
+      <p>
+          <input type="button" (click)="deleteOrder(i)">
+      </p>
+      <p>
+        <input type="button" (click)="selectDuplicate(i)">
+    </p>
+
     </div>
   </div>
-  <button type="submit">helllo</button>
-  <button type="button" type="button" (click)="oderSubmit()">add</button>
+
 
 </form>
 <button type="button" (click)="oderPush()">push</button>
+
+<button type="submit">helllo</button>
+<button type="button" type="button" (click)="oderSubmit()">add</button>
 

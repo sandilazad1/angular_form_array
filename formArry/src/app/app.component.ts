@@ -8,13 +8,14 @@ import { FormBuilder,FormArray,FormGroup} from '@angular/forms';
 export class AppComponent implements OnInit{
   title = 'formArry';
   addOrder !: FormGroup;
-
-  constructor (private formBuilder:FormBuilder){
+  order!: FormArray;
+  dorder!: {};
+  constructor (private fb:FormBuilder){
   }
 
   ngOnInit(): void {
-    this.addOrder = this.formBuilder.group({
-      order : this.formBuilder.array([this.initAddOrder()])
+    this.addOrder = this.fb.group({
+      order : this.fb.array([this.initAddOrder()])
     })
 
   }
@@ -24,16 +25,17 @@ export class AppComponent implements OnInit{
   }
 
   initAddOrder(){
-    return this.formBuilder.group({
+    return this.fb.group({
       name:[""],
       phone:[""],
       email:[""],
+      delete:[""],
     })
   }
 
 
   deleteOrder(index:number){
-  this.orderArr.removeAt(index)
+  this.order.removeAt(index)
   }
   oderSubmit(){
     console.log(this.addOrder.value);
@@ -44,8 +46,18 @@ export class AppComponent implements OnInit{
     console.log(this.addOrder.value);
 
   }
+
+  selectDuplicate(i:number){
+    this.dorder = this.addOrder.value.order[i] ;
+  }
   oderPush(){
-    this.orderArr.push(this.initAddOrder())
+     console.log(this.dorder);
+
+    this.order = this.addOrder.get('order') as FormArray;
+    this.order.push(this.initAddOrder());
+    this.order.patchValue([
+
+    ]);
   }
 }
 
